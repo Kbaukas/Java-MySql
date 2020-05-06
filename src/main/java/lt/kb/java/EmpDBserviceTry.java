@@ -1,4 +1,6 @@
-package lt.kb.java.empDBServices;
+package lt.kb.java;
+
+import lt.kb.java.empDBServices.EmployeeService;
 
 import java.sql.SQLException;
 
