@@ -82,12 +82,12 @@ public class TestServices {
     @Test
     public void test() throws SQLException {
         List<Employee> employeeList = new ArrayList<>();
-        employeeList = EmployeeService.loadEmployees(2, 3);
+        employeeList = EmployeeService.loadEmployees(3, 6);
         assertNotNull(employeeList);
-        assertEquals(3, employeeList.size());
+        assertEquals(2, employeeList.size());
         assertNotNull(employeeList.get(0).getSalaries());
-        assertEquals(1, employeeList.get(0).getSalaries().size());
-        assertEquals(2, employeeList.get(1).getSalaries().size());
+        assertEquals(2, employeeList.get(0).getSalaries().size());
+        assertEquals(1, employeeList.get(1).getSalaries().size());
     }
 
 }
