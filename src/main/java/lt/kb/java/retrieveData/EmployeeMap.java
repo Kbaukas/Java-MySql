@@ -8,6 +8,7 @@ public class EmployeeMap {
     public static Employee fromResultSet(ResultSet resultSet) {
         try {
             Employee employee = new Employee();
+
             employee.setEmpNo(resultSet.getInt("emp_no"));
             employee.setFirstName(resultSet.getString("first_name"));
             employee.setLastName(resultSet.getString("last_name"));

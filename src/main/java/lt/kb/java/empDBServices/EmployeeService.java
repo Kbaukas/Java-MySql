@@ -63,12 +63,11 @@ public class EmployeeService {
             empLIst = employeeMap.entrySet().stream().map(e -> {
                 List<Salary> salaryList1;
                 salaryList1 = salaryList.stream()
-                        .filter(salary -> salary.getEmpNo() == e.getValue().getEmpNo())
+                        .filter(salary -> salary.getEmpNo() == e.getValue().getEmpNo()&&salary.getFromDate()!=null)
                         .collect(Collectors.toList());
                 e.getValue().setSalaries(salaryList1);
                 return e.getValue();
             }).collect(Collectors.toList());
-//            empLIst.forEach(e -> System.out.println(e.getFirstName()));
 
             return empLIst;
 

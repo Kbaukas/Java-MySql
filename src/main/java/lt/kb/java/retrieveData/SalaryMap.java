@@ -9,9 +9,22 @@ public class SalaryMap {
         try {
             Salary salary = new Salary();
             salary.setEmpNo(resultSet.getInt("emp_no"));
-            salary.setFromDate(resultSet.getDate("from_date").toLocalDate());
-            salary.setToDate(resultSet.getDate("to_date").toLocalDate());
-            salary.setSalary(resultSet.getInt("salary"));
+
+
+            if(resultSet.getDate("from_date")==null){ }
+            else  salary.setFromDate(resultSet.getDate("from_date").toLocalDate());
+
+
+            if(resultSet.getDate("to_date")==null){ }
+            else  salary.setToDate(resultSet.getDate("to_date").toLocalDate());
+
+            if(resultSet.getInt("salary")==0){
+            }
+            else  salary.setSalary(resultSet.getInt("salary"));
+
+
+
+//            salary.setSalary(resultSet.getInt("salary"));
             return salary;
 
         } catch (SQLException e) {
