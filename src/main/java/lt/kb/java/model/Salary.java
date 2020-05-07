@@ -1,4 +1,4 @@
-package lt.kb.java.retrieveData;
+package lt.kb.java.model;
 
 import java.time.LocalDate;
 

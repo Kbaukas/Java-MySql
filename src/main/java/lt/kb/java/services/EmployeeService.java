@@ -1,10 +1,7 @@
-package lt.kb.java.empDBServices;
+package lt.kb.java.services;
 
-import lt.kb.java.Connection.MysqlCon;
-import lt.kb.java.retrieveData.Employee;
-import lt.kb.java.retrieveData.EmployeeMap;
-import lt.kb.java.retrieveData.Salary;
-import lt.kb.java.retrieveData.SalaryMap;
+import lt.kb.java.model.Employee;
+import lt.kb.java.model.Salary;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +29,7 @@ public class EmployeeService {
     public static List<Employee> loadEmployees(int from, int limit) {
         List<Employee> empLIst;
         try {
-            Connection conn = MysqlCon.createConnection();
+            Connection conn = DBService.createConnection();
 // -----------------------Pirmas variantas selekto-------------------------------------
 /*
             PreparedStatement stm = conn.prepareStatement(" with em as ( select * from employees order by emp_no limit ?,?)\n" +

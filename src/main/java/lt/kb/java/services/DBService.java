@@ -1,4 +1,4 @@
-package lt.kb.java.Connection;
+package lt.kb.java.services;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class MysqlCon {
+public class DBService {
     private static DataSource ds;
    private static HikariConfig config=new HikariConfig();
 //    private static HikariDataSource ds;
@@ -18,7 +18,7 @@ public class MysqlCon {
     private static Properties properties;
     static {
         properties=new Properties();
-        InputStream is = MysqlCon.class.getClassLoader().
+        InputStream is = DBService.class.getClassLoader().
                 getResourceAsStream("application.properties");
         try {
             properties.load(is);

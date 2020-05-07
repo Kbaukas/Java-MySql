@@ -1,4 +1,4 @@
-package lt.kb.java.retrieveData;
+package lt.kb.java.model;
 
 import java.sql.Date;
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package lt.kb.java.retrieveData;
+package lt.kb.java.services;
+
+import lt.kb.java.model.Employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
