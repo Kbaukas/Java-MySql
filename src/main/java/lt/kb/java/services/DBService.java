@@ -34,7 +34,7 @@ public class DBService {
         config.setPassword(properties.getProperty("db.password"));
         ds=new HikariDataSource(config);
     }
-        public static Connection createConnection() throws SQLException {
+        public static Connection getConnectionFromCP() throws SQLException {
                 return ds.getConnection();
 
         }

@@ -13,11 +13,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestServices extends DBTest {
+public class EmployeeServiceTest extends DBTestBase {
 
     @Test
     public void testInitData() throws SQLException {
-        Connection connection = DBService.createConnection();
+        Connection connection = DBService.getConnectionFromCP();
         Statement stmt = connection.createStatement();
         ResultSet resultSet = stmt.executeQuery("SELECT COUNT(*) FROM employees");
         assertTrue(resultSet.next());

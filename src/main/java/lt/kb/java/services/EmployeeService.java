@@ -29,7 +29,7 @@ public class EmployeeService {
     public static List<Employee> loadEmployees(int from, int limit) {
         List<Employee> empLIst;
         try {
-            Connection conn = DBService.createConnection();
+            Connection conn = DBService.getConnectionFromCP();
 // -----------------------Pirmas variantas selekto-------------------------------------
 /*
             PreparedStatement stm = conn.prepareStatement(" with em as ( select * from employees order by emp_no limit ?,?)\n" +

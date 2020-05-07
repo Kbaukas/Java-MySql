@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBTest {
+public class DBTestBase {
 
     @Before
     public void start() throws SQLException {
         Connection conn;
         PreparedStatement statement;
-        conn = DBService.createConnection();
+        conn = DBService.getConnectionFromCP();
 
         Statement stmt = conn.createStatement();
         // stmt.execute("drop table if exists employees");
