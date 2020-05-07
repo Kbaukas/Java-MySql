@@ -29,21 +29,13 @@ public class EmployeeService {
         return super.equals(obj);
     }
 
-    /**
-     * Grazinti employee puslapi
-     *
-     * @param from  puslapio numeris (numeruojame nuo 0)
-     * @param limit puslapio dydis
-     * @return
-     */
-
     public static List<Employee> loadEmployees(int from, int limit) {
         List<Employee> empLIst;
         try {
             Connection conn = MysqlCon.createConnection();
 // -----------------------Pirmas variantas selekto-------------------------------------
-
-           /* PreparedStatement stm = conn.prepareStatement(" with em as ( select * from employees order by emp_no limit ?,?)\n" +
+/*
+            PreparedStatement stm = conn.prepareStatement(" with em as ( select * from employees order by emp_no limit ?,?)\n" +
                     " select emp.*, s.salary,s.from_date,s.to_date from salaries s \n" +
                     " join employees emp\n" +
                     " on emp.emp_no=s.emp_no\n" +
@@ -51,9 +43,9 @@ public class EmployeeService {
 
 // ------------------------Antras variantas selekto------------------------
 
-            PreparedStatement stm = conn.prepareStatement("select m.*,  s.salary,s.from_date,s.to_date  from salaries s \n" +
-                    " join (select distinct * from employees limit ?,?) m\n" +
-                    "using(emp_no);");
+            PreparedStatement stm = conn.prepareStatement("select m.*,  s.salary,s.from_date,s.to_date" +
+                    "  from  (select * from employees limit ?,?) m\n" +
+                    " left join salaries s using (emp_no);");
 
             stm.setInt(1, (limit * from));
             stm.setInt(2, limit);
