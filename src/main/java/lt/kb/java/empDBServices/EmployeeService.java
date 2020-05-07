@@ -43,8 +43,9 @@ public class EmployeeService {
 
 // ------------------------Antras variantas selekto------------------------
 
-            PreparedStatement stm = conn.prepareStatement("select m.*,  s.salary,s.from_date,s.to_date" +
-                    "  from  (select * from employees limit ?,?) m\n" +
+            PreparedStatement stm = conn.prepareStatement("select m.*, " +
+                    " s.salary,s.from_date,s.to_date,s.to_date,s.emp_no as s_emp_no" +
+                    " from  (select * from employees limit ?,?) m\n" +
                     " left join salaries s using (emp_no);");
 
             stm.setInt(1, (limit * from));
@@ -63,7 +64,7 @@ public class EmployeeService {
             empLIst = employeeMap.entrySet().stream().map(e -> {
                 List<Salary> salaryList1;
                 salaryList1 = salaryList.stream()
-                        .filter(salary -> salary.getEmpNo() == e.getValue().getEmpNo()&&salary.getFromDate()!=null)
+                        .filter(salary -> salary.getEmpNo() == e.getValue().getEmpNo())
                         .collect(Collectors.toList());
                 e.getValue().setSalaries(salaryList1);
                 return e.getValue();

@@ -8,7 +8,7 @@ public class SalaryMap {
     public static Salary fromResultSet(ResultSet resultSet) {
         try {
             Salary salary = new Salary();
-            salary.setEmpNo(resultSet.getInt("emp_no"));
+            salary.setEmpNo(resultSet.getInt("s_emp_no"));
 
 
             if(resultSet.getDate("from_date")==null){ }

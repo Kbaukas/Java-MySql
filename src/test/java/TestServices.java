@@ -35,7 +35,7 @@ public class TestServices {
                 "('1921-12-12','kitas15','adsad','M','1940-12-12'),('1921-12-12','kitas16','adsad','M','1940-12-12')," +
                 "('1921-12-12','kitas17','adsad','M','1940-12-12'),('1921-12-12','kitas18','adsad','M','1940-12-12')," +
                 "('1921-12-12','kitas19','adsad','M','1940-12-12'),('1921-12-12','kitas20','adsad','M','1940-12-12')," +
-                "('1921-12-12','kitas21','adsad','M','1940-12-12')");
+                "('1921-12-12','kitas2','adsad','M','1940-12-12')");
 
         statement.executeUpdate();
         statement = conn.prepareStatement("Create table salaries(emp_no int,salary int, from_date date, to_date date)");
@@ -74,11 +74,8 @@ public class TestServices {
         );
 
         statement.executeUpdate();
-//        conn.commit();
-
         statement.close();
         conn.close();
-
     }
 
     @Test
@@ -94,18 +91,14 @@ public class TestServices {
         assertEquals(6000, employeeList.get(1).getSalaries().get(0).getSalary());
         assertEquals(2, employeeList.get(0).getSalaries().size());
         assertEquals(1, employeeList.get(1).getSalaries().size());
-//       assertEquals(0,employeeList.get(2).getSalaries().size());
 
     }
-
+// testas kai employee neturi salary
     @Test
     public void testSalaries() throws SQLException {
         List<Employee> employeeList = new ArrayList<>();
         employeeList = EmployeeService.loadEmployees(3, 6);
-
         assertEquals(0, employeeList.get(2).getSalaries().size());
-//        System.out.println(employeeList.get(2).getSalaries().get(0).getSalary());
-//      System.out.println(employeeList.get(2).getSalaries().get(0).getToDate());
     }
 
 }
