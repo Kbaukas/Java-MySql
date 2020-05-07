@@ -66,7 +66,7 @@ public class TestServices {
                 "('17','3000','1980-03-08','1981-12-12')," +
                 "('18','3000','1980-08-11','1981-12-12')," +
                 "('18','3000','1980-09-10','1981-12-12')," +
-                "('19','3000','1980-11-14','1981-12-12')," +
+                "('19','3500','1980-11-14','1981-12-12')," +
                 "('19','3000','1980-10-10','1981-12-12')," +
                 "('20','6000','1977-10-19','1979-12-12')"
         );
@@ -86,6 +86,10 @@ public class TestServices {
         assertNotNull(employeeList);
         assertEquals(2, employeeList.size());
         assertNotNull(employeeList.get(0).getSalaries());
+        assertNotNull(employeeList.get(1).getSalaries());
+        assertEquals(3500, employeeList.get(0).getSalaries().get(0).getSalary());
+        assertEquals(3000, employeeList.get(0).getSalaries().get(1).getSalary());
+        assertEquals(6000, employeeList.get(1).getSalaries().get(0).getSalary());
         assertEquals(2, employeeList.get(0).getSalaries().size());
         assertEquals(1, employeeList.get(1).getSalaries().size());
     }
