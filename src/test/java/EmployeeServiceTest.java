@@ -1,17 +1,14 @@
 import lt.kb.java.model.Employee;
 import lt.kb.java.services.DBService;
 import lt.kb.java.services.EmployeeService;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeServiceTest extends DBTestBase {
 
@@ -19,10 +16,11 @@ public class EmployeeServiceTest extends DBTestBase {
     public void testInitData() throws SQLException {
         Connection connection = DBService.getConnectionFromCP();
         Statement stmt = connection.createStatement();
-        ResultSet resultSet = stmt.executeQuery("SELECT COUNT(*) FROM employees");
+        ResultSet resultSet = stmt.executeQuery("SELECT count (*) FROM employees");
         assertTrue(resultSet.next());
-        Assertions.assertEquals(14, resultSet.getInt(1));
-       connection.close();
+        assertEquals(14, resultSet.getInt(1));
+        connection.close();
+//        System.out.println("reee");
     }
 
     @Test
@@ -40,15 +38,49 @@ public class EmployeeServiceTest extends DBTestBase {
         assertEquals(1100, employeeList.get(1).getSalaries().get(2).getSalary());
         assertEquals(2, employeeList.get(0).getSalaries().size());
         assertEquals(3, employeeList.get(1).getSalaries().size());
+//        employeeList = EmployeeService.loadEmployees(2, 5);
+        assertEquals(1, employeeList.get(2).getSalaries().size());
+        assertEquals(0, employeeList.get(3).getSalaries().size());
 
     }
 
-    // testas kai employee neturi salary
+
     @Test
-    public void testSalaries() throws SQLException {
-        List<Employee> employeeList = new ArrayList<>();
-        employeeList = EmployeeService.loadEmployees(2, 5);
-        assertEquals(0, employeeList.get(3).getSalaries().size());
+    public void testUpdate() throws SQLException {
+        Employee employee = EmployeeService.loadEmployee(3);
+        assertEquals("A3", employee.getFirstName());
+        assertEquals(Date.valueOf("2000-01-03"), employee.getBirthDate());
+
+        employee.setFirstName("A31");
+        employee.setBirthDate(Date.valueOf("2000-02-15"));
+        EmployeeService.saveEmployee(employee);
+        employee = EmployeeService.loadEmployee(3);
+        System.out.println("emp " + employee.getFirstName());
+        assertEquals("A31", employee.getFirstName());
+        assertEquals(Date.valueOf("2000-02-15"), employee.getBirthDate());
+    }
+
+    @Test
+    public void testCreate() throws SQLException {
+        Employee employee = new Employee();
+        employee.setFirstName("X1");
+        employee.setLastName("X2");
+        employee.setBirthDate(Date.valueOf(LocalDate.of(2000, 12, 31)));
+        employee.setGender("M");
+        employee.setHireDate(Date.valueOf(LocalDate.of(2020, 3, 31)));
+        Employee employee1 = EmployeeService.createEmployee(employee);
+        System.out.println(employee1.getFirstName());
+        assertNotNull(employee1.getEmpNo());
+        assertEquals("X1", employee1.getFirstName());
+
+    }
+
+    @Test
+    public void testDelete() throws SQLException {
+        Employee employee = EmployeeService.loadEmployee(3);
+        EmployeeService.deleteEmployee(employee);
+        assertNull(EmployeeService.loadEmployee(3));
+//        System.out.println(employee.getFirstName());
     }
 
 }

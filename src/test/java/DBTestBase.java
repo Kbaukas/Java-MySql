@@ -1,17 +1,17 @@
 import lt.kb.java.services.DBService;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBTestBase {
 
-    @Before
+    @BeforeEach
     public void start() throws SQLException {
+        System.out.println("*************Connection************");
         Connection conn;
-        PreparedStatement statement;
         conn = DBService.getConnectionFromCP();
 
         Statement stmt = conn.createStatement();
@@ -56,6 +56,7 @@ public class DBTestBase {
         stmt.execute(
                 "insert into salaries values" +
                         " (1, '2018-03-01', '9999-01-01', 1500)," +
+                        " (2, '2018-03-01', '9999-01-01', 1500)," +
                         " (3, '2018-03-03', '2018-04-01', 1000)," +
                         " (3, '2018-04-01', '9999-01-01', 2000)," +
                         " (4, '2018-03-04', '2018-05-01', 1100)," +
@@ -76,6 +77,13 @@ public class DBTestBase {
                         " (13, '2019-01-01', '2020-05-01', 1100)");
         conn.close();
     }
-
+    @AfterEach
+    public void stop() throws SQLException {
+        Connection connection = DBService.getConnectionFromCP();
+        Statement stmt = connection.createStatement();
+        stmt.execute("drop table if exists employees");
+        stmt.execute("drop table if exists salaries");
+        connection.close();
+    }
 }
 

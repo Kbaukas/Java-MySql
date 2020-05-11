@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class SalaryMap {
 
     public static Salary fromResultSet(ResultSet resultSet) {
+
         try {
             Salary salary = new Salary();
             salary.setEmpNo(resultSet.getInt("s_emp_no"));
